@@ -361,14 +361,34 @@ def ytchannels_main():
 					li[i] = xbmcgui.ListItem(results[i][0],results[i][4])
 					li[i].setArt({'icon':results[i][2]})
 				dialog = xbmcgui.Dialog()
-				index = dialog.select(local_string(30013), li, useDetails=True)
-				if index>-1:
-					channel_uplid=results[index][1]
-					channel_name=results[index][0]
-					thumb=results[index][2]
-					channel_id=results[index][3]
+				# index = dialog.select(local_string(30013), li, useDetails=True)
+				# if index>-1:
+					# channel_uplid=results[index][1]
+					# channel_name=results[index][0]
+					# thumb=results[index][2]
+					# channel_id=results[index][3]
 
-					add_channel(foldername,channel_name,channel_uplid,thumb)
+					# add_channel(foldername,channel_name,channel_uplid,thumb)
+				indexes = dialog.multiselect(local_string(30013), li, useDetails=True)
+				if indexes != None:
+					for index in indexes:
+						channel_uplid=results[index][1]
+						channel_name=results[index][0]
+						thumb=results[index][2]
+						channel_id=results[index][3]
+
+						add_channel(foldername,channel_name,channel_uplid,thumb)
+				# index = dialog.select(local_string(30013), li, useDetails=True)
+				# index = 0
+				# while index>-1:
+					# index = dialog.multiselect(local_string(30013), li, useDetails=True)
+					# if index>-1:
+						# channel_uplid=results[index][1]
+						# channel_name=results[index][0]
+						# thumb=results[index][2]
+						# channel_id=results[index][3]
+
+						# add_channel(foldername,channel_name,channel_uplid,thumb)
 		elif ind==1:
 			dicti=urllib.parse.parse_qs(sys.argv[2][1:])
 			foldername=dicti['foldername'][0]
